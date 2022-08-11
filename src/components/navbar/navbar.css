@@ -1,0 +1,44 @@
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(87, 87, 241);
+  height: 80px;
+  width: 100%;
+  max-width: 1600px;
+}
+.nav-container-links {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-container-links-register {
+  width: 80px;
+  border: none;
+  font: 20px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.nav-container-links-login {
+  width: 80px;
+  border: none;
+  font: 20px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.4rem;
+  padding-left: 20px;
+}
+
+.nav-container-chat-link {
+  text-decoration: none;
+  font-size: 2.2rem;
+  color: aliceblue;
+}

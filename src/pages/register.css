@@ -1,0 +1,44 @@
+.main-frm-cnt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.heading-cnt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  background-color: rgb(150, 235, 235);
+}
+
+.form-heading {
+  font-size: 1.9rem;
+  height: 80px;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 1.5rem;
+  gap: 40px;
+  background-color: rgb(150, 235, 235);
+}
+
+.reg-frm-inp {
+  width: 400px;
+  height: 35px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.submit-btn {
+  width: 132px;
+  height: 43px;
+  border-radius: 6px;
+  font-size: large;
+}

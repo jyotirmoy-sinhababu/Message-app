@@ -1,13 +1,17 @@
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseUrl: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_API_ID,
+  apiKey: 'AIzaSyCk546itKt_3k8MprqW5SlYNSRA_gZ0qZc',
+  authDomain: 'message-app-77f91.firebaseapp.com',
+  databaseUrl: 'https://message-app-77f91.firebase.io.com',
+  projectId: 'message-app-77f91',
+  storageBucket: 'message-app-77f91.appspot.com',
+  messagingSenderId: '388301541267',
+  appId: '1:388301541267:web:9860f31b8b8bfe7c69a266',
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export { auth };

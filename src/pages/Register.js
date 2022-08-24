@@ -1,37 +1,38 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../Firebase';
+import { auth, db } from '../Firebase';
+import { setDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import './register.css';
 
 function Register() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     name: '',
     email: '',
     password: '',
   });
+
   const { name, email, password } = data;
+
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: [e.target.value] });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handelSubmit = async (e) => {
     e.preventDefault();
-
-    if (!name || !email || !password) {
-      debugger;
-      alert('all field are required ');
-    }
     try {
-      const createUser = await createUserWithEmailAndPassword(
-        auth,
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, 'users', res.user.uid), {
+        uid: res.user.uid,
+        name,
         email,
-        password
-      );
-      debugger;
-    } catch (err) {
-      console.log('error');
-    }
+        password,
+      });
+      setData({ name: '', email: '', password: '' });
+    } catch (err) {}
   };
 
   return (
@@ -42,6 +43,7 @@ function Register() {
       <form
         onSubmit={(e) => {
           handelSubmit(e);
+          navigate('/');
         }}
         className='reg-form'
       >

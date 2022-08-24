@@ -1,10 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCk546itKt_3k8MprqW5SlYNSRA_gZ0qZc',
   authDomain: 'message-app-77f91.firebaseapp.com',
-  databaseUrl: 'https://message-app-77f91.firebase.io.com',
   projectId: 'message-app-77f91',
   storageBucket: 'message-app-77f91.appspot.com',
   messagingSenderId: '388301541267',
@@ -13,5 +13,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-export { auth };
+export { auth, db };

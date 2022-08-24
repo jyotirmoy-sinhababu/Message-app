@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../Firebase';
 import { setDoc, doc, Timestamp } from 'firebase/firestore';
@@ -83,11 +82,7 @@ function Register() {
           name='password'
           className='reg-frm-inp'
         />
-        <div className='frm-btn'>
-          <NavLink to='/login' className='navigate-btn' type='button'>
-            Login
-          </NavLink>
-        </div>
+
         {error ? <p className='error'>{error}</p> : null}
 
         <button type='submit' className='submit-btn'>

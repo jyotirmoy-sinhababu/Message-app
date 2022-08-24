@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../Firebase';
-import { setDoc, doc } from 'firebase/firestore';
+import { auth, db } from '../../Firebase';
+import { setDoc, doc, Timestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
 
@@ -13,9 +13,10 @@ function Register() {
     name: '',
     email: '',
     password: '',
+    error: '',
   });
 
-  const { name, email, password } = data;
+  const { name, email, password, error } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -23,6 +24,9 @@ function Register() {
 
   const handelSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !email || !password) {
+      setData({ ...data, error: 'All fields are require' });
+    }
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       await setDoc(doc(db, 'users', res.user.uid), {
@@ -30,9 +34,14 @@ function Register() {
         name,
         email,
         password,
+        createdAt: Timestamp.fromDate(new Date()),
+        isOnline: true,
       });
       setData({ name: '', email: '', password: '' });
-    } catch (err) {}
+      navigate('/');
+    } catch (err) {
+      setData({ ...data, error: 'All fields are require' });
+    }
   };
 
   return (
@@ -43,7 +52,6 @@ function Register() {
       <form
         onSubmit={(e) => {
           handelSubmit(e);
-          navigate('/');
         }}
         className='reg-form'
       >
@@ -80,6 +88,7 @@ function Register() {
             Login
           </NavLink>
         </div>
+        {error ? <p className='error'>{error}</p> : null}
 
         <button type='submit' className='submit-btn'>
           Submit

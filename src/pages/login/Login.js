@@ -22,7 +22,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='main-login-cnt'>
+      <div className='heading-cnt'>
+        <p className='login-heading'>please login</p>
+      </div>
       <form
         onSubmit={(e) => {
           handelSubmit(e);

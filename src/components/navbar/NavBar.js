@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../../Firebase';
 import './navbar.css';
 
 function NavBar() {
@@ -11,12 +12,25 @@ function NavBar() {
         </Link>
       </h3>
       <div className='nav-container-links'>
-        <Link className='nav-container-links-register' to='/register'>
-          Register
-        </Link>
-        <Link className='nav-container-links-login' to='/Login'>
-          Login
-        </Link>
+        {auth.currentUser ? (
+          <>
+            <Link className='nav-container-links-register' to='/profile'>
+              Profile
+            </Link>
+            <button className='nav-container-links-login'>Log out</button>
+
+            {console.log('is working')}
+          </>
+        ) : (
+          <>
+            <Link className='nav-container-links-register' to='/register'>
+              Register
+            </Link>
+            <Link className='nav-container-links-login' to='/Login'>
+              Login
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -12,10 +12,10 @@ function Register() {
     name: '',
     email: '',
     password: '',
-    error: '',
+    // error: '',
   });
 
-  const { name, email, password, error } = data;
+  const { name, email, password } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -23,9 +23,9 @@ function Register() {
 
   const handelSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !email || !password) {
-      setData({ ...data, error: 'All fields are require' });
-    }
+    // if (!name || !email || !password) {
+    //   setData({ ...data, error: 'All fields are require' });
+    // }
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       await setDoc(doc(db, 'users', res.user.uid), {
@@ -39,7 +39,7 @@ function Register() {
       setData({ name: '', email: '', password: '' });
       navigate('/');
     } catch (err) {
-      setData({ ...data, error: 'All fields are require' });
+      // setData({ ...data, error: 'All fields are require' });
     }
   };
 
@@ -83,7 +83,7 @@ function Register() {
           className='reg-frm-inp'
         />
 
-        {error ? <p className='error'>{error}</p> : null}
+        {/* {error ? <p className='error'>{error}</p> : null} */}
 
         <button type='submit' className='submit-btn'>
           Submit

@@ -1,9 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { auth } from '../../Firebase';
+import { auth, db } from '../../Firebase';
+import { signOut } from 'firebase/auth';
+import { updateDoc, doc } from 'firebase/firestore';
 import './navbar.css';
 
 function NavBar() {
+  const handelSignOut = async () => {
+    await updateDoc(doc(db, 'user', auth.currentUser.uid), {
+      isOnline: false,
+    });
+    await signOut(auth);
+  };
+
   return (
     <nav className='nav-container'>
       <h3 className='nav-container-chat'>
@@ -17,9 +26,12 @@ function NavBar() {
             <Link className='nav-container-links-register' to='/profile'>
               Profile
             </Link>
-            <button className='nav-container-links-login'>Log out</button>
-
-            {console.log('is working')}
+            <button
+              className='nav-container-links-login'
+              onClick={handelSignOut()}
+            >
+              Log out
+            </button>
           </>
         ) : (
           <>

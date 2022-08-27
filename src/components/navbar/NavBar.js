@@ -7,7 +7,7 @@ import './navbar.css';
 
 function NavBar() {
   const handelSignOut = async () => {
-    await updateDoc(doc(db, 'user', auth.currentUser.uid), {
+    await updateDoc(doc(db, 'users', auth.currentUser.uid), {
       isOnline: false,
     });
     await signOut(auth);
@@ -28,7 +28,7 @@ function NavBar() {
             </Link>
             <button
               className='nav-container-links-login'
-              onClick={handelSignOut()}
+              onClick={handelSignOut}
             >
               Log out
             </button>

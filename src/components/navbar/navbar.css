@@ -42,3 +42,16 @@
   font-size: 2.2rem;
   color: aliceblue;
 }
+
+.nav-container-links-logout {
+  width: 100px;
+  border: none;
+  font: 20px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 6px;
+  color: blue;
+  text-decoration: none;
+  font-size: 1.4rem;
+  padding-left: 20px;
+}

@@ -1,11 +1,15 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { auth, db } from '../../Firebase';
 import { signOut } from 'firebase/auth';
 import { updateDoc, doc } from 'firebase/firestore';
+import { AuthContext } from '../context/auth';
 import './navbar.css';
 
-function NavBar() {
+const NavBar = () => {
+  const { user } = useContext(AuthContext);
+
   const handelSignOut = async () => {
     await updateDoc(doc(db, 'users', auth.currentUser.uid), {
       isOnline: false,
@@ -21,13 +25,13 @@ function NavBar() {
         </Link>
       </h3>
       <div className='nav-container-links'>
-        {auth.currentUser ? (
+        {user ? (
           <>
             <Link className='nav-container-links-register' to='/profile'>
               Profile
             </Link>
             <button
-              className='nav-container-links-login'
+              className='nav-container-links-logout'
               onClick={handelSignOut}
             >
               Log out
@@ -46,6 +50,6 @@ function NavBar() {
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;

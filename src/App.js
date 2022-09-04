@@ -5,6 +5,7 @@ import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import NavBar from './components/navbar/NavBar';
 import AuthProvider from './components/context/auth';
+import './App.css';
 
 function App() {
   return (

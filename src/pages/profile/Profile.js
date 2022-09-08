@@ -2,27 +2,20 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { storage } from '../../Firebase';
+import './profile.css';
 
 const Profile = () => {
   const [img, setImg] = useState('');
 
   const handelSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const imgRef = ref(storage, `avatar/${new Date().getTime()}.${img.name}`);
-      const snap = await uploadBytes(imgRef, img);
-    } catch (err) {
-      console.error('error');
-    }
+    const imgRef = ref(storage, `${new Date().getTime()}-${img.name}`);
+    const snap = await uploadBytes(imgRef, img);
+    console.log(snap);
   };
-
   return (
     <div>
       <div className='file-container'>
-        <label>upload your photo</label>
-        <div className='img-container'>
-          <img src={img} alt='avatar' />
-        </div>
         <form
           className='form-container'
           onSubmit={(e) => {
@@ -31,9 +24,9 @@ const Profile = () => {
         >
           <input
             type='file'
-            accept='image/'
+            accept='image'
             id='photo'
-            onChange={(e) => setImg(e.target.files[0])}
+            onChange={(e) => setImg(URL.createObjectURL(e.target.files[0]))}
           />
           <button type='submit'>upload</button>
         </form>
